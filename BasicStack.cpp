@@ -89,8 +89,11 @@ int main(){
 				cout<<st.pop()<<" Element Poped"<<endl;
 				break;
 			case 4://Display Stack
-					st.Display();
-					break;
+				st.Display();
+				break;
+			case 0://Exit
+				cout<<"Exiting Program! TQ!"<<endl;
+				break;
 
 			default:cout<<"Invalid Choice";
 
