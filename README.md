@@ -1,9 +1,8 @@
 # DataStructure
 BASICS
 > Stack
-- Simple Stack Implementation
-- using Array
-- Using Template
+- Simple Stack Implementation Template and array
+- Basic Examples (Dec2Binary and Dec2Octal)
 > Queue
 - Singular Queue
 - Circular Queue
