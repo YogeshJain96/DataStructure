@@ -1,2 +1,5 @@
 # DataStructure
-BASIC DS Programs
+BASICS
+>Stack
+>Queue
+>LinkedList
