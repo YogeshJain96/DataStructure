@@ -119,12 +119,95 @@ class LinkedList //Train
 			}
 
 		}
+		int Size()
+		{
+			int n=0;
+			Node<T> *t=head;
+			while(t!=nullptr){
+				t=t->getNext();
+				n++;
+			} 
+			return n;
+		}
 
-		void InsertAtN(int n, T ele){}
+		void InsertAtN(int n, T ele){
+		int s=Size();
+		if(n<=s && n>=0){
+			if(n<=1)
+				AddAtBeg(ele);	
+			else{
+				int count=1;
+				Node<T> *temp=new Node<T>;
+				temp->setData(ele);
+				Node<T> *p=head;
+				while(count<n-1){
+					p=p->getNext();
+					count++;
+				}
+				temp->setNext(p->getNext());
+				p->setNext(temp);
+			}
+			Display();
+		}
+		else 
+			cout<<"Enter Value less than "<<s<<endl;
 
-		void DelAtN(int n){}
+		
+}
 
-		void Reverse(){}
+		void DelAtN(int n){
+			int s=Size();
+			T ele;
+		if(n<=s && n>=1){
+			if(n==1)
+				DelAtBeg();	
+			else{
+				int count=1;
+				Node<T> *p=head;
+				Node<T> *q=head->getNext();
+				while(count<n-1){
+					p=p->getNext();
+					count++;
+				}
+				q=p->getNext();
+				ele=q->getData();
+				p->setNext(q->getNext());
+				delete q;
+		}
+			Display();
+		}
+		else 
+			cout<<"Enter Value less than "<<s<<endl;
+
+		
+}
+
+		void Reverse()
+		{
+		if(!isEmpty()){
+			if(!(head->getNext()==nullptr && tail->getNext()==nullptr)){
+		
+			Node<T> *t1=head;
+			Node<T> *t2=nullptr;
+			
+			head=head->getNext();
+			t1->setNext(nullptr);
+			tail=t1;
+			// tail=head;
+			//cout<<head->getData();
+			while(head!=nullptr)
+			{
+				t2=head;
+				head=head->getNext();
+				t2->setNext(t1);
+				t1=t2;
+			}
+			head=t2;
+		 }
+		 else return;
+	}
+
+		}
 
 		void Display()
 		{
@@ -145,7 +228,7 @@ int main(){
 	LinkedList<int> l;
 	int m;
 	do{
-		cout<<"Enter Choice:\n1.AddAtEnd\n2.AddAtBeg\n3.DeleteAtEnd\n4.DeleteAtBeg\n5.InsertAtN\n6.DeleteAtN\n7.ReverseLL\n8.Display\n0.Exit\n";
+		cout<<"Enter Choice:\n1.AddAtEnd\n2.AddAtBeg\n3.DeleteAtEnd\n4.DeleteAtBeg\n5.InsertAtN\n6.DeleteAtN\n7.ReverseLL\n8.Display\n9.Size\n0.Exit\n";
 		cin>>m;
 		cin.get();
 		
@@ -187,7 +270,7 @@ int main(){
 			case 6://DeleteAtN
 				{
 					int n;
-					cout<<"Delete the Node At: ";
+					cout<<"Enter Position from where you want to Delete Node: ";
 					cin>>n;
 					l.DelAtN(n);
 				}break;
@@ -199,6 +282,9 @@ int main(){
 				
 			case 8://Display LinkedList
 					l.Display();
+					break;
+			case 9://Size Of Linked List
+					cout<<"Size Of Linked List: "<<l.Size()<<endl;
 					break;
 			case 0:break;
 
