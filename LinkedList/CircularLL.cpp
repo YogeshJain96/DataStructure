@@ -125,7 +125,30 @@ class CLinkedList //Train
 			}
 
 		}
+		bool loopDet()
+		{
+			if(!isEmpty()){
+				
+				if(head->getNext()==nullptr)
+					return true;
+			Node<T>* slow=head;
+			Node<T>* fast=head->getNext();
+			while(slow!=nullptr|| fast!=nullptr || fast->getNext()!=nullptr)
+			{
+				if(slow==fast)
+				{
+					return true;
+				}
+				else
+				{
+					slow=slow->getNext();
+					fast=fast->getNext()->getNext();
+					}
+				}
+			}
+			return false;
 
+		}
 
 
 		void Display()
@@ -149,7 +172,7 @@ int main(){
 	CLinkedList<int> l;
 	int m;
 	do{
-		cout<<"Enter Choice:\n1.AddAtEnd\n2.AddAtBeg\n3.DeleteAtEnd\n4.DeleteAtBeg\n7.ReverseLL\n8.Display\n0.Exit\n";
+		cout<<"Enter Choice:\n1.AddAtEnd\n2.AddAtBeg\n3.DeleteAtEnd\n4.DeleteAtBeg\n5.Floyd's Loop Detection\n6.Display\n0.Exit\n";
 		cin>>m;
 		cin.get();
 		
@@ -180,28 +203,15 @@ int main(){
 					l.DelAtBeg();
 					l.Display();
 				}break;
-		//	case 5://InsertAtN
-			// 	{	int n,v;
-			// 		cout<<"Enter Position where you want to Insert Node: ";
-			// 		cin>>n;
-			// 		cout<<"Enter Node to InsertAt "<<n<<"th Position : ";
-			// 		cin>>v;
-			// 		l.InsertAtN(n,v);
-			// 	}break;
-			// case 6://DeleteAtN
-			// 	{
-			// 		int n;
-			// 		cout<<"Delete the Node At: ";
-			// 		cin>>n;
-			// 		l.DelAtN(n);
-			// 	}break;
-			// case 7://Reverse
-			// 	{
-			// 		l.Reverse();
-			// 		l.Display();
-			// 	}break;
-				
-			case 8://Display LinkedList
+			case 5://loop Detection
+				{
+				if(l.loopDet())
+					cout<<"Loop Detected!"<<endl;
+				else
+					cout<<"Loop Missing!"<<endl;
+				}break;
+
+			case 6://Display LinkedList
 					l.Display();
 					break;
 			case 0:break;
