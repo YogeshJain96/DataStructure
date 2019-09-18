@@ -78,7 +78,90 @@ class BST
 			}
 		}
 
+		bool Delete(TreeNode<T> *temp)
+		{
+			if(temp!=nullptr)
+			{
+			Delete(temp->getLeft());
+			Delete(temp->getRight());
+			delete temp;
+			}
+			root=nullptr;
+			return true;
+		}
 
+		T Find_Min(TreeNode<T> *t)			//TreeNode<T>* Find_Min(TreeNode<T> *t)
+		{
+			if(t==nullptr||t->getLeft()==nullptr)
+			{
+				return t->getData();			//return t;
+			}
+			else
+			{
+				Find_Min(t->getLeft());
+			}
+		}
+												//For Node
+		T Find_Max(TreeNode<T> *t)			//TreeNode<T>* Find_Min(TreeNode<T> *t)
+		{
+			if(t==nullptr|| t->getRight()==nullptr)
+			{
+				return t->getData();   		//return t;
+			}
+			else
+			{
+				Find_Max(t->getRight());
+			}
+		}
+
+		int Depth(TreeNode<T>* temp)
+		{
+			if(temp==nullptr)
+				return 0;
+			else{
+				int ldepth=Depth(temp->getLeft());
+				int rdepth=Depth(temp->getRight());
+
+				if(ldepth>rdepth)
+					return (ldepth+1);
+				else
+					return (rdepth+1);
+			}
+
+		}
+		//tRYING WITH LOOP
+		// int Depth(TreeNode<T>* temp,int dmax){
+		// 	int dep=0;
+
+		// 	//Traverse Left
+		// 	TreeNode<T> *current=root->getLeft();
+		// 	while(current!=nullptr){
+		// 		cout<<"Inside Left While"<<endl;
+		// 		if(current!=nullptr){	
+		// 			dep++;
+		// 			current=current->getLeft();
+		// 			return 0;
+		// 			}
+		// 		}
+
+		// 	if(dep>dmax)
+		// 		dmax=dep;
+		// 	//Traverse Right
+		// 	current=root->getRight();
+		// 	while(current!=nullptr){
+		// 		cout<<"Inside Right While"<<endl;
+		// 		if(current!=nullptr){	
+		// 			dep++;
+		// 			current=current->getRight();
+		// 			return 0;
+		// 			}
+		// 		}
+
+		// 	if(dep>dmax)
+		// 		dmax=dep;
+
+		// 	return dmax;
+		// }
 
 		void Display(){
 			cout<<"\n\nIn Order list --> ";
@@ -87,9 +170,8 @@ class BST
 			PreOrderDisp(getRoot());
 			cout<<"\n\nPost Order list --> ";
 			PostOrderDisp(getRoot());
-		
+			cout<<endl;		
 			}
-
 		// void Display1(){
 			// TreeNode<T> *current=root->getLeft();
 
@@ -112,34 +194,90 @@ class BST
 			// 	}
 			// }
 			// }
-
-		};
+};
 
 int main()
 {	
 	BST<int> bst;
-	int n;
-	char x;
+	int x;
+	int c;
 	do
 	{	
-		cout<<"\nEnter Element"<<endl;
-		cin>>n;
+		
+		cout<<"Enter choice\n1.Insert\n2.InOrder\n3.PreOrder\n4.PostOrder\n5.Delete\n6.Find_Min\n7.Find_Max\n8.Display\n9.Depth\n0.Exit"<<endl;
+		cin>>c;
 		cin.get();
-		if(!cin.fail())
-			bst.Insert(n);
-		else
+		switch(c)
 		{
-			cin.clear();
-			cin.ignore();
-			cout<<"Enter Valid Number!!"<<endl;
+			case 1://Insert a Node in Tree
+			{
+				int n;
+				cout<<"\nEnter Element"<<endl;
+				cin>>n;
+				cin.get();
+				bst.Insert(n);
+			}break;
+
+			case 2://InOrder Sequence of Tree
+			{
+				bst.InOrderDisp(bst.getRoot());
+			}break;
+
+			case 3://PreOrder Sequence of Tree
+			{
+				bst.PreOrderDisp(bst.getRoot());
+			}break;
+
+			case 4://PostOrder Sequence of Tree
+			{
+				bst.PostOrderDisp(bst.getRoot());
+			}break;
+
+			case 5://Delete a Node in Tree
+			{
+				if(bst.Delete(bst.getRoot()));
+				cout<<"Tree is Deleted and Empty."<<endl;
+			}break;
+
+			case 6://Find_Min Node of Tree
+			{
+				cout<<"Min :"<<bst.Find_Min(bst.getRoot())<<endl;		//bst.Find_Min(bst.getRoot())->getData()
+			}break;
+
+			case 7://Find_Max Node of Tree
+			{
+				cout<<"Max :"<<bst.Find_Max(bst.getRoot())<<endl;		//bst.Find_Max(bst.getRoot())->getData()
+			}break;
+
+			case 8://Display Tree
+			{
+				bst.Display();
+			}break;
+
+			case 9://Depth/Height of Tree
+			{
+				cout<<"Depth of Tree : "<<bst.Depth(bst.getRoot())<<endl;
+			}break;
+
+			case 0:break;
+			default :
+			cout<<"Invalid choice"<<endl;
 		}
-		// //bst.Display();
-		cout<<"\nWant to add more(y/n)?"<<endl;
-		cin>>x;
-		cin.get();
-	}while(x!='n');
-
-	bst.Display();
-
+	}while(c!=0);
 	return 0;
 }
+		
+		
+		// if(!cin.fail())
+			
+		// else
+		// {
+		// 	cin.clear();
+		// 	cin.ignore();
+		// 	cout<<"Enter Valid Number!!"<<endl;
+		// }
+		// // //bst.Display();
+		// cout<<"\nWant to add more(y/n)?"<<endl;
+		// cin>>x;
+		// cin.get();
+	
