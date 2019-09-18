@@ -126,7 +126,7 @@ class CLinkedList //Train
 
 		}
 		bool loopDet()
-		{
+		{//Floyd's Loop Detection Algo
 			if(!isEmpty()){
 				
 				if(head->getNext()==nullptr)
