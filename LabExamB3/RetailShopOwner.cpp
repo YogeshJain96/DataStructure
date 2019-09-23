@@ -3,17 +3,20 @@
 using namespace std;
 class RetailShopOwner{
     private:
-        int id;
+        string id;
         string name;
         string city;
         string product;
 
     public:
         void Accept(){
-            cin>>id;
-            cin.get();
+            cout<<"ID: ";
+            getline(cin,id);
+            cout<<"Name: ";
             getline(cin,name);
+            cout<<"City: ";
             getline(cin,city);
+            cout<<"Product: ";
             getline(cin,product);
             
         }
